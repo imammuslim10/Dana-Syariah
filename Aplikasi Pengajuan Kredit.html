@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengajuan Kredit Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans antialiased">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-blue-700 text-white shadow-lg">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b4e62560-86e9-4246-905b-68ad1f5c7be4.png" alt="Logo Bank Modern dengan desain minimalis warna biru dan putih" class="rounded-full">
+                        <h1 class="text-2xl font-bold">Kredit<span class="text-blue-200">Plus</span></h1>
+                    </div>
+                    <nav class="hidden md:block">
+                        <ul class="flex space-x-6">
+                            <li><a href="#" class="hover:text-blue-200 transition">Beranda</a></li>
+                            <li><a href="#" class="hover:text-blue-200 transition">Produk</a></li>
+                            <li><a href="#" class="hover:text-blue-200 transition">Tentang Kami</a></li>
+                            <li><a href="#" class="hover:text-blue-200 transition">Kontak</a></li>
+                        </ul>
+                    </nav>
+                    <button class="md:hidden text-2xl">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl font-bold mb-4 fade-in">Ajukan Kredit Anda Sekarang</h2>
+                <p class="text-xl mb-8 max-w-2xl mx-auto fade-in">Proses cepat, persetujuan mudah, dengan bunga kompetitif untuk kebutuhan finansial Anda.</p>
+                <div class="flex justify-center space-x-4 fade-in">
+                    <a href="#form" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-medium hover:bg-blue-100 transition">Ajukan Sekarang</a>
+                    <a href="#" class="border-2 border-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">Pelajari Lebih Lanjut</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Application Form -->
+        <section id="form" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                    <!-- Form Progress -->
+                    <div class="p-6 bg-gray-100">
+                        <div class="flex items-center justify-between">
+                            <div class="flex flex-col items-center">
+                                <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">1</div>
+                                <span class="text-sm mt-2 text-blue-600 font-medium">Data Pribadi</span>
+                            </div>
+                            <div class="h-1 flex-1 bg-gray-300 mx-2">
+                                <div class="h-full bg-blue-600 w-0" id="progress-1"></div>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-10 h-10 rounded-full bg-gray-300 text-gray-700 flex items-center justify-center font-bold">2</div>
+                                <span class="text-sm mt-2 text-gray-500">Info Kredit</span>
+                            </div>
+                            <div class="h-1 flex-1 bg-gray-300 mx-2">
+                                <div class="h-full bg-blue-600 w-0" id="progress-2"></div>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-10 h-10 rounded-full bg-gray-300 text-gray-700 flex items-center justify-center font-bold">3</div>
+                                <span class="text-sm mt-2 text-gray-500">Dokumen</span>
+                            </div>
+                            <div class="h-1 flex-1 bg-gray-300 mx-2">
+                                <div class="h-full bg-blue-600 w-0" id="progress-3"></div>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-10 h-10 rounded-full bg-gray-300 text-gray-700 flex items-center justify-center font-bold">4</div>
+                                <span class="text-sm mt-2 text-gray-500">Selesai</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Sections -->
+                    <form id="creditForm" class="p-6">
+                        <!-- Step 1: Personal Info -->
+                        <div class="step" data-step="1">
+                            <h3 class="text-2xl font-bold mb-6 text-blue-800">Informasi Pribadi</h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="nama" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                                    <input type="text" id="nama" name="nama" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                    <span class="text-red-500 text-sm hidden" id="nama-error">Nama harus diisi</span>
+                                </div>
+                                
+                                <div>
+                                    <label for="nik" class="block text-sm font-medium text-gray-700 mb-1">NIK</label>
+                                    <input type="text" id="nik" name="nik" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                    <span class="text-red-500 text-sm hidden" id="nik-error">NIK harus 16 digit angka</span>
+                                </div>
+                                
+                                <div>
+                                    <label for="tempat_lahir" class="block text-sm font-medium text-gray-700 mb-1">Tempat Lahir</label>
+                                    <input type="text" id="tempat_lahir" name="tempat_lahir" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                </div>
+                                
+                                <div>
+                                    <label for="tanggal_lahir" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Lahir</label>
+                                    <input type="date" id="tanggal_lahir" name="tanggal_lahir" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                </div>
+                                
+                                <div>
+                                    <label for="jenis_kelamin" class="block text-sm font-medium text-gray-700 mb-1">Jenis Kelamin</label>
+                                    <select id="jenis_kelamin" name="jenis_kelamin" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                        <option value="" disabled selected>Pilih Jenis Kelamin</option>
+                                        <option value="L">Laki-laki</option>
+                                        <option value="P">Perempuan</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status Pernikahan</label>
+                                    <select id="status" name="status" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                        <option value="" disabled selected>Pilih Status</option>
+                                        <option value="belum_menikah">Belum Menikah</option>
+                                        <option value="menikah">Menikah</option>
+                                        <option value="cerai">Cerai</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                    <span class="text-red-500 text-sm hidden" id="email-error">Format email tidak valid</span>
+                                </div>
+                                
+                                <div>
+                                    <label for="telepon" class="block text-sm font-medium text-gray-700 mb-1">Nomor Telepon</label>
+                                    <input type="tel" id="telepon" name="telepon" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                </div>
+                                
+                                <div class="md:col-span-2">
+                                    <label for="alamat" class="block text-sm font-medium text-gray-700 mb-1">Alamat Lengkap</label>
+                                    <textarea id="alamat" name="alamat" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Credit Info -->
+                        <div class="step hidden" data-step="2">
+                            <h3 class="text-2xl font-bold mb-6 text-blue-800">Informasi Kredit</h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="jenis_kredit" class="block text-sm font-medium text-gray-700 mb-1">Jenis Kredit</label>
+                                    <select id="jenis_kredit" name="jenis_kredit" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                        <option value="" disabled selected>Pilih Jenis Kredit</option>
+                                        <option value="konsumsi">Kredit Konsumsi</option>
+                                        <option value="modal_usaha">Kredit Modal Usaha</option>
+                                        <option value="kpr">Kredit Perumahan (KPR)</option>
+                                        <option value="kendaraan">Kredit Kendaraan</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label for="jumlah_kredit" class="block text-sm font-medium text-gray-700 mb-1">Jumlah Kredit (Rp)</label>
+                                    <input type="number" id="jumlah_kredit" name="jumlah_kredit" min="1000000" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                </div>
+                                
+                                <div>
+                                    <label for="tenor" class="block text-sm font-medium text-gray-700 mb-1">Tenor (bulan)</label>
+                                    <input type="number" id="tenor" name="tenor" min="6" max="60" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                </div>
+                                
+                                <div>
+                                    <label for="tujuan" class="block text-sm font-medium text-gray-700 mb-1">Tujuan Penggunaan</label>
+                                    <select id="tujuan" name="tujuan" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                        <option value="" disabled selected>Pilih Tujuan</option>
+                                        <option value="pendidikan">Pendidikan</option>
+                                        <option value="usaha">Pengembangan Usaha</option>
+                                        <option value="rumah">Pembelian Rumah</option>
+                                        <option value="kendaraan">Pembelian Kendaraan</option>
+                                        <option value="kesehatan">Kesehatan</option>
+                                        <option value="lainnya">Lainnya</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label for="pekerjaan" class="block text-sm font-medium text-gray-700 mb-1">Pekerjaan</label>
+                                    <select id="pekerjaan" name="pekerjaan" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                        <option value="" disabled selected>Pilih Pekerjaan</option>
+                                        <option value="pns">PNS</option>
+                                        <option value="swasta">Swasta</option>
+                                        <option value="wiraswasta">Wiraswasta</option>
+                                        <option value="profesional">Profesional</option>
+                                        <option value="lainnya">Lainnya</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label for="penghasilan" class="block text-sm font-medium text-gray-700 mb-1">Penghasilan per Bulan (Rp)</label>
+                                    <input type="number" id="penghasilan" name="penghasilan" min="1000000" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                                </div>
+                                
+                                <div class="md:col-span-2">
+                                    <label for="keterangan" class="block text-sm font-medium text-gray-700 mb-1">Keterangan Tambahan</label>
+                                    <textarea id="keterangan" name="keterangan" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Documents -->
+                        <div class="step hidden" data-step="3">
+                            <h3 class="text-2xl font-bold mb-6 text-blue-800">Upload Dokumen</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition cursor-pointer bg-gray-50" onclick="document.getElementById('ktp').click()">
+                                    <input type="file" id="ktp" name="ktp" class="hidden" accept="image/*,.pdf" required>
+                                    <i class="fas fa-file-upload text-4xl text-blue-500 mb-2"></i>
+                                    <p class="font-medium">Upload KTP</p>
+                                    <p class="text-sm text-gray-500">Format: JPG, PNG atau PDF (Maks. 5MB)</p>
+                                    <p class="text-sm mt-2 text-blue-600 hidden" id="ktp-name">Tidak ada file dipilih</p>
+                                </div>
+                                
+                                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition cursor-pointer bg-gray-50" onclick="document.getElementById('kk').click()">
+                                    <input type="file" id="kk" name="kk" class="hidden" accept="image/*,.pdf" required>
+                                    <i class="fas fa-file-upload text-4xl text-blue-500 mb-2"></i>
+                                    <p class="font-medium">Upload Kartu Keluarga</p>
+                                    <p class="text-sm text-gray-500">Format: JPG, PNG atau PDF (Maks. 5MB)</p>
+                                    <p class="text-sm mt-2 text-blue-600 hidden" id="kk-name">Tidak ada file dipilih</p>
+                                </div>
+                                
+                                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition cursor-pointer bg-gray-50" onclick="document.getElementById('slip_gaji').click()">
+                                    <input type="file" id="slip_gaji" name="slip_gaji" class="hidden" accept="image/*,.pdf" required>
+                                    <i class="fas fa-file-upload text-4xl text-blue-500 mb-2"></i>
+                                    <p class="font-medium">Upload Slip Gaji</p>
+                                    <p class="text-sm text-gray-500">Format: JPG, PNG atau PDF (Maks. 5MB)</p>
+                                    <p class="text-sm mt-2 text-blue-600 hidden" id="slip_gaji-name">Tidak ada file dipilih</p>
+                                </div>
+                                
+                                <div>
+                                    <label for="dokumen_tambahan" class="block text-sm font-medium text-gray-700 mb-2">Dokumen Tambahan (Opsional)</label>
+                                    <div class="flex items-center space-x-4">
+                                        <input type="file" id="dokumen_tambahan" name="dokumen_tambahan[]" class="block w-full border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" multiple>
+                                        <button type="button" id="tambahDokumen" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Tambah</button>
+                                    </div>
+                                    <div id="listDokumen" class="mt-2 space-y-2"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Confirmation -->
+                        <div class="step hidden" data-step="4">
+                            <h3 class="text-2xl font-bold mb-6 text-blue-800">Konfirmasi Pengajuan</h3>
+                            
+                            <div class="bg-blue-50 rounded-lg p-6 mb-6">
+                                <div class="flex items-center">
+                                    <i class="fas fa-check-circle text-4xl text-blue-600 mr-4"></i>
+                                    <div>
+                                        <h4 class="font-bold text-lg">Pengajuan Anda Sudah Siap!</h4>
+                                        <p class="text-gray-700">Silakan periksa kembali data yang telah Anda isi sebelum submit.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                <div>
+                                    <h4 class="font-bold text-blue-800 mb-4 border-b pb-2">Informasi Pribadi</h4>
+                                    <div class="space-y-2" id="review-personal"></div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="font-bold text-blue-800 mb-4 border-b pb-2">Informasi Kredit</h4>
+                                    <div class="space-y-2" id="review-credit"></div>
+                                </div>
+                                
+                                <div class="md:col-span-2">
+                                    <h4 class="font-bold text-blue-800 mb-4 border-b pb-2">Dokumen</h4>
+                                    <div class="space-y-2" id="review-documents"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center mb-4">
+                                <input type="checkbox" id="persetujuan" name="persetujuan" class="mr-2 h-4 w-4" required>
+                                <label for="persetujuan">Saya menyetujui syarat dan ketentuan pengajuan kredit ini</label>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="flex justify-between mt-8">
+                            <button type="button" id="prevBtn" class="px-6 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition hidden">Kembali</button>
+                            <button type="button" id="nextBtn" class="ml-auto px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition">Lanjut</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-12 text-blue-800">Hitung Cicilan Anda</h2>
+                    
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="calcJumlah" class="block text-sm font-medium text-gray-700 mb-1">Jumlah Kredit (Rp)</label>
+                                <input type="number" id="calcJumlah" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" min="1000000" value="10000000">
+                            </div>
+                            
+                            <div>
+                                <label for="calcTenor" class="block text-sm font-medium text-gray-700 mb-1">Tenor (bulan)</label>
+                                <select id="calcTenor" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="6">6 Bulan</option>
+                                    <option value="12">12 Bulan</option>
+                                    <option value="24">24 Bulan</option>
+                                    <option value="36" selected>36 Bulan</option>
+                                    <option value="48">48 Bulan</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="calcBunga" class="block text-sm font-medium text-gray-700 mb-1">Suku Bunga (% per tahun)</label>
+                                <input type="number" id="calcBunga" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" step="0.01" value="9.5" min="1" max="30">
+                            </div>
+                            
+                            <div>
+                                <label for="calcBiaya" class="block text-sm font-medium text-gray-700 mb-1">Biaya Admin (Rp)</label>
+                                <input type="number" id="calcBiaya" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" value="250000">
+                            </div>
+                        </div>
+                        
+                        <button id="hitungBtn" class="w-full md:w-auto px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition mb-6">Hitung Cicilan</button>
+                        
+                        <div id="hasilHitung" class="hidden bg-blue-50 p-6 rounded-lg">
+                            <h4 class="font-bold text-blue-800 mb-4">Hasil Perhitungan</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="bg-white p-4 rounded-lg">
+                                    <p class="text-sm text-gray-500">Angsuran per Bulan</p>
+                                    <p class="text-xl font-bold text-blue-700" id="hasilAngsuran">-</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg">
+                                    <p class="text-sm text-gray-500">Total Pembayaran</p>
+                                    <p class="text-xl font-bold text-blue-700" id="hasilTotal">-</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg">
+                                    <p class="text-sm text-gray-500">Total Bunga</p>
+                                    <p class="text-xl font-bold text-blue-700" id="hasilBunga">-</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 text-blue-800">Pertanyaan yang Sering Diajukan</h2>
+                
+                <div class="max-w-4xl mx-auto space-y-4">
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="faq-btn w-full flex justify-between items-center p-6 bg-gray-50 text-left hover:bg-gray-100 transition">
+                            <span class="font-medium">Berapa lama waktu proses pengajuan kredit?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden p-6 border-t border-gray-200">
+                            <p>Proses pengajuan kredit kami membutuhkan waktu 3-5 hari kerja setelah semua dokumen lengkap diterima. Untuk kredit dengan plafon di atas Rp500 juta, prosesnya mungkin membutuhkan waktu hingga 7 hari kerja.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="faq-btn w-full flex justify-between items-center p-6 bg-gray-50 text-left hover:bg-gray-100 transition">
+                            <span class="font-medium">Dokumen apa saja yang diperlukan untuk pengajuan kredit?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden p-6 border-t border-gray-200">
+                            <p>Dokumen yang diperlukan meliputi:</p>
+                            <ul class="list-disc pl-5 mt-2 space-y-1">
+                                <li>Foto copy KTP</li>
+                                <li>Foto copy Kartu Keluarga</li>
+                                <li>Slip gaji 3 bulan terakhir (untuk karyawan)</li>
+                                <li>Foto copy NPWP</li>
+                                <li>Bukti penghasilan lainnya (jika ada)</li>
+                                <li>Untuk usaha: laporan keuangan 6 bulan terakhir</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="faq-btn w-full flex justify-between items-center p-6 bg-gray-50 text-left hover:bg-gray-100 transition">
+                            <span class="font-medium">Berapa bunga kredit yang berlaku?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden p-6 border-t border-gray-200">
+                            <p>Suku bunga kredit kami bervariasi tergantung jenis kredit dan tenor yang dipilih, mulai dari 9.5% per tahun. Anda dapat menggunakan kalkulator kami untuk menghitung estimasi cicilan berdasarkan plafon dan tenor yang Anda inginkan.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="faq-btn w-full flex justify-between items-center p-6 bg-gray-50 text-left hover:bg-gray-100 transition">
+                            <span class="font-medium">Apakah ada biaya administrasi?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden p-6 border-t border-gray-200">
+                            <p>Ya, terdapat biaya administrasi sebesar 0.5% dari plafon kredit dengan minimal Rp250.000,-. Biaya ini akan dipotong dari dana kredit yang dicairkan.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="faq-btn w-full flex justify-between items-center p-6 bg-gray-50 text-left hover:bg-gray-100 transition">
+                            <span class="font-medium">Kapan dana kredit akan dicairkan?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden p-6 border-t border-gray-200">
+                            <p>Setelah pengajuan Anda disetujui, dana akan dicairkan dalam waktu maksimal 2 hari kerja setelah penandatanganan dokumen perjanjian kredit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="py-16 bg-blue-700 text-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6">Hubungi Kami</h2>
+                        <p class="mb-6">Kami siap membantu Anda dengan layanan kredit profesional dan terpercaya. Tim customer service kami siap melayani Anda dari Senin-Jumat pukul 08.00-17.00 WIB.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold">Kantor Pusat</h4>
+                                    <p>Jl. Sudirman No. 123, Jakarta 10210</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-phone-alt mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold">Telepon</h4>
+                                    <p>021-12345678</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-envelope mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold">Email</h4>
+                                    <p>cs@kreditplus.co.id</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Kirim Pesan</h3>
+                        <form class="space-y-4">
+                            <div>
+                                <label for="contactName" class="block text-sm font-medium mb-1">Nama Anda</label>
+                                <input type="text" id="contactName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-blue-600 text-white placeholder-blue-300" placeholder="Masukkan nama">
+                            </div>
+                            
+                            <div>
+                                <label for="contactEmail" class="block text-sm font-medium mb-1">Email</label>
+                                <input type="email" id="contactEmail" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-blue-600 text-white placeholder-blue-300" placeholder="Masukkan email">
+                            </div>
+                            
+                            <div>
+                                <label for="contactMessage" class="block text-sm font-medium mb-1">Pesan</label>
+                                <textarea id="contactMessage" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-blue-600 text-white placeholder-blue-300" placeholder="Tulis pesan Anda"></textarea>
+                            </div>
+                            
+                            <button type="button" class="px-6 py-3 bg-white text-blue-700 rounded-lg font-medium hover:bg-blue-100 transition">Kirim Pesan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-blue-900 text-white py-8">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Kredit<span class="text-blue-300">Plus</span></h3>
+                        <p class="text-blue-200">Solusi kredit terpercaya untuk berbagai kebutuhan finansial Anda dengan proses cepat dan persyaratan mudah.</p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold mb-4">Produk</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-blue-200 hover:text-white transition">Kredit Konsumsi</a></li>
+                            <li><a href="#" class="text-blue-200 hover:text-white transition">Kredit Modal Usaha</a></li>
+                            <li><a href="#" class="text-blue-200 hover:text-white transition">Kredit Perumahan (KPR)</a></li>
+                            <li><a href="#" class="text-blue-200 hover:text-white transition">Kredit Kendaraan</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold mb-4">Layanan</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-blue-200 hover:text-white transition">Kalkulator Kredit</a></li>
+                            <li><a href="#" class="text-blue-200 hover:text-white transition">Cek Status Pengajuan</a></li>
+                            <li><a href="#" class="text-blue-200 hover:text-white transition">Bayar Kredit</a></li>
+                            <li><a href="#" class="text-blue-200 hover:text-white transition">FAQ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold mb-4">Ikuti Kami</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="bg-blue-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="bg-blue-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="bg-blue-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="bg-blue-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                        <p class="mt-4 text-sm text-blue-200">Dapatkan info terbaru tentang promo dan produk kami</p>
+                    </div>
+                </div>
+                
+                <div class="border-t border-blue-800 mt-8 pt-6 text-center text-sm text-blue-300">
+                    <p>© 2023 KreditPlus. Hak Cipta Dilindungi.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <div class="text-center">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-check text-4xl text-green-600"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Pengajuan Berhasil!</h3>
+                <p class="text-gray-600 mb-6">Pengajuan kredit Anda telah kami terima. Nomor referensi Anda adalah <span id="nomorReferensi" class="font-bold">KR-2023-0123456</span>. Tim kami akan menghubungi Anda dalam waktu 1x24 jam.</p>
+                <button id="modalClose" class="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form Wizard Functionality
+        let currentStep = 1;
+        const steps = document.querySelectorAll('.step');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        
+        function showStep(step) {
+            steps.forEach(s => s.classList.add('hidden'));
+            document.querySelector(`.step[data-step="${step}"]`).classList.remove('hidden');
+            
+            // Update progress bar
+            const progressBars = ['progress-1', 'progress-2', 'progress-3'];
+            progressBars.forEach((bar, index) => {
+                const element = document.getElementById(bar);
+                if (index < step - 1) {
+                    element.style.width = '100%';
+                } else if (index === step - 1) {
+                    element.style.width = (step === 1 ? '0%' : (step === 2 ? '50%' : (step === 3 ? '75%' : '100%')));
+                } else {
+                    element.style.width = '0%';
+                }
+            });
+            
+            // Update button text
+            if (step === 4) {
+                nextBtn.textContent = 'Submit Pengajuan';
+            } else {
+                nextBtn.textContent = 'Lanjut';
+            }
+            
+            // Show/hide prev button
+            if (step === 1) {
+                prevBtn.classList.add('hidden');
+            } else {
+                prevBtn.classList.remove('hidden');
+            }
+        }
+        
+        function validateStep(step) {
+            let isValid = true;
+            
+            if (step === 1) {
+                // Validate personal info
+                const nama = document.getElementById('nama');
+                const nik = document.getElementById('nik');
+                const email = document.getElementById('email');
+                
+                if (!nama.value.trim()) {
+                    document.getElementById('nama-error').classList.remove('hidden');
+                    isValid = false;
+                } else {
+                    document.getElementById('nama-error').classList.add('hidden');
+                }
+                
+                if (!nik.value.trim() || nik.value.length !== 16 || isNaN(nik.value)) {
+                    document.getElementById('nik-error').classList.remove('hidden');
+                    isValid = false;
+                } else {
+                    document.getElementById('nik-error').classList.add('hidden');
+                }
+                
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value)) {
+                    document.getElementById('email-error').classList.remove('hidden');
+                    isValid = false;
+                } else {
+                    document.getElementById('email-error').classList.add('hidden');
+                }
+                
+            } else if (step === 2) {
+                // Validate credit info
+                const jumlahKredit = document.getElementById('jumlah_kredit');
+                
+                if (!jumlahKredit.value || parseFloat(jumlahKredit.value) < 1000000) {
+                    alert('Jumlah kredit minimal Rp1.000.000');
+                    isValid = false;
+                }
+                
+            } else if (step === 3) {
+                // Validate documents
+                const ktp = document.getElementById('ktp');
+                const kk = document.getElementById('kk');
+                const slipGaji = document.getElementById('slip_gaji');
+                
+                if (!ktp.files.length) {
+                    alert('Harap upload KTP');
+                    isValid = false;
+                }
+                
+                if (!kk.files.length) {
+                    alert('Harap upload Kartu Keluarga');
+                    isValid = false;
+                }
+                
+                if (!slipGaji.files.length) {
+                    alert('Harap upload Slip Gaji');
+                    isValid = false;
+                }
+            }
+            
+            return isValid;
+        }
+        
+        function prepareReview() {
+            // Personal info
+            const personalFields = [
+                { label: 'Nama Lengkap', id: 'nama' },
+                { label: 'NIK', id: 'nik' },
+                { label: 'Tempat/Tgl Lahir', id: 'tempat_lahir', extra: document.getElementById('tanggal_lahir').value },
+                { label: 'Jenis Kelamin', id: 'jenis_kelamin' },
+                { label: 'Status Pernikahan', id: 'status' },
+                { label: 'Email', id: 'email' },
+                { label: 'No. Telepon', id: 'telepon' },
+                { label: 'Alamat', id: 'alamat' }
+            ];
+            
+            let personalHtml = '';
+            personalFields.forEach(field => {
+                const element = document.getElementById(field.id);
+                let value = element.value;
+                
+                if (element.tagName === 'SELECT') {
+                    value = element.options[element.selectedIndex].text;
+                }
+                
+                if (field.extra) {
+                    value += `, ${field.extra}`;
+                }
+                
+                personalHtml += `
+                    <div>
+                        <span class="text-sm text-gray-500">${field.label}</span>
+                        <p class="font-medium">${value || '-'}</p>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('review-personal').innerHTML = personalHtml;
+            
+            // Credit info
+            const creditFields = [
+                { label: 'Jenis Kredit', id: 'jenis_kredit' },
+                { label: 'Jumlah Kredit', id: 'jumlah_kredit', prefix: 'Rp' },
+                { label: 'Tenor', id: 'tenor', suffix: ' bulan' },
+                { label: 'Tujuan Penggunaan', id: 'tujuan' },
+                { label: 'Pekerjaan', id: 'pekerjaan' },
+                { label: 'Penghasilan', id: 'penghasilan', prefix: 'Rp' },
+                { label: 'Keterangan Tambahan', id: 'keterangan' }
+            ];
+            
+            let creditHtml = '';
+            creditFields.forEach(field => {
+                const element = document.getElementById(field.id);
+                let value = element.value;
+                
+                if (element.tagName === 'SELECT') {
+                    value = element.options[element.selectedIndex].text;
+                }
+                
+                if (field.prefix && value) value = field.prefix + formatNumber(value);
+                if (field.suffix && value) value += field.suffix;
+                
+                creditHtml += `
+                    <div>
+                        <span class="text-sm text-gray-500">${field.label}</span>
+                        <p class="font-medium">${value || '-'}</p>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('review-credit').innerHTML = creditHtml;
+            
+            // Documents
+            const docFields = [
+                { label: 'KTP', id: 'ktp-name' },
+                { label: 'Kartu Keluarga', id: 'kk-name' },
+                { label: 'Slip Gaji', id: 'slip_gaji-name' }
+            ];
+            
+            let docHtml = '';
+            docFields.forEach(field => {
+                const name = document.getElementById(field.id).textContent;
+                docHtml += `
+                    <div>
+                        <span class="text-sm text-gray-500">${field.label}</span>
+                        <p class="font-medium">${name}</p>
+                    </div>
+                `;
+            });
+            
+            // Additional documents
+            const additionalDocs = document.getElementById('listDokumen').querySelectorAll('p');
+            if (additionalDocs.length) {
+                docHtml += `<h5 class="font-bold mt-4">Dokumen Tambahan</h5>`;
+                
+                additionalDocs.forEach(doc => {
+                    docHtml += `
+                        <div>
+                            <p class="font-medium">${doc.textContent}</p>
+                        </div>
+                    `;
+                });
+            }
+            
+            document.getElementById('review-documents').innerHTML = docHtml;
+        }
+        
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentStep === 4) {
+                // Submit form
+                document.getElementById('successModal').classList.remove('hidden');
+            } else {
+                if (validateStep(currentStep)) {
+                    if (currentStep === 3) {
+                        prepareReview();
+                    }
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            }
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            currentStep--;
+            showStep(currentStep);
+        });
+        
+        // File upload handlers
+        document.getElementById('ktp').addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : 'Tidak ada file dipilih';
+            document.getElementById('ktp-name').textContent = fileName;
+            document.getElementById('ktp-name').classList.remove('hidden');
+        });
+        
+        document.getElementById('kk').addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : 'Tidak ada file dipilih';
+            document.getElementById('kk-name').textContent = fileName;
+            document.getElementById('kk-name').classList.remove('hidden');
+        });
+        
+        document.getElementById('slip_gaji').addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : 'Tidak ada file dipilih';
+            document.getElementById('slip_gaji-name').textContent = fileName;
+            document.getElementById('slip_gaji-name').classList.remove('hidden');
+        });
+        
+        // Additional documents
+        document.getElementById('tambahDokumen').addEventListener('click', function() {
+            const input = document.getElementById('dokumen_tambahan');
+            if (input.files.length) {
+                const list = document.getElementById('listDokumen');
+                
+                Array.from(input.files).forEach(file => {
+                    const p = document.createElement('p');
+                    p.textContent = file.name;
+                    p.className = 'text-sm bg-gray-100 p-2 rounded';
+                    list.appendChild(p);
+                });
+                
+                // Reset input
+                input.value = '';
+            }
+        });
+        
+        // Calculator
+        document.getElementById('hitungBtn').addEventListener('click', function() {
+            const jumlah = parseFloat(document.getElementById('calcJumlah').value);
+            const tenor = parseInt(document.getElementById('calcTenor').value);
+            const bunga = parseFloat(document.getElementById('calcBunga').value) / 100 / 12; // Monthly interest
+            const biaya = parseFloat(document.getElementById('calcBiaya').value);
+            
+            // Calculate annuity payment
+            const pembilang = jumlah * bunga * Math.pow(1 + bunga, tenor);
+            const penyebut = Math.pow(1 + bunga, tenor) - 1;
+            const angsuran = pembilang / penyebut;
+            
+            // Calculate totals
+            const total = angsuran * tenor;
+            const totalBunga = total - jumlah;
+            
+            // Update UI
+            document.getElementById('hasilAngsuran').textContent = 'Rp' + formatNumber(Math.round(angsuran));
+            document.getElementById('hasilTotal').textContent = 'Rp' + formatNumber(Math.round(total));
+            document.getElementById('hasilBunga').textContent = 'Rp' + formatNumber(Math.round(totalBunga));
+            document.getElementById('hasilHitung').classList.remove('hidden');
+        });
+        
+        // FAQ accordion
+        document.querySelectorAll('.faq-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+        
+        // Modal close
+        document.getElementById('modalClose').addEventListener('click', function() {
+            document.getElementById('successModal').classList.add('hidden');
+        });
+        
+        // Initialize first step
+        showStep(currentStep);
+    </script>
+</body>
+</html>
+
